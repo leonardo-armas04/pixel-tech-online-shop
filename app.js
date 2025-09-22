@@ -6,6 +6,8 @@ const app = express()
 app.set("view engine","ejs") // Use the EJS package
 app.set("views",path.join(__dirname,"views")) // Where to find my views
 
+app.use(express.static("public"))
+
 const authRoutes = require("./routes/auth-routes")
 
 app.use(authRoutes)

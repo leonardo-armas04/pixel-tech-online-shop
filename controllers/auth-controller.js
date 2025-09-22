@@ -1,5 +1,7 @@
 function getSignUp(req,res) {
-    // code ...
+    // A path relative to the views folder 
+    // because this is which we configured in the template engine
+    res.render("costumer/auth/signup")
 }
 
 function getLogin(req,res) {

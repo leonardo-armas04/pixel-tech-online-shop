@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Quantico", sans-serif;
+
+    --color-dark-blue: #191970;
+    --color-cobalt-blue: #0047AB;
+    --color-neon-blue: #1F51FF;
+    --color-cornflower-blue: #6495ED;
+    
+    --color-error-100: #FAA0A0;
+    --color-error-500: #D2042D;
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    
+    --border-radius-small: 4px;
+    --border-radius-medium: 6px;
+    
+    --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.2);
+}

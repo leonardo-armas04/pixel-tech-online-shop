@@ -1,0 +1,58 @@
+<%- include("../includes/head",{pageTitle: "Sign up"}) %>
+    <link rel="stylesheet" href="/styles/forms.css">
+    <link rel="stylesheet" href="/styles/auth.css">
+</head>
+
+<body>
+    <%- include("../includes/header") %>
+    <main>
+        <h1>Create new account</h1>
+        <form action="" method="">
+            <div>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div>
+                <label for="confirm-email">Confirm Email</label>
+                <input type="email" name="confirm-email" id="confirm-email" required>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" minlength="8" required>
+            </div>
+
+            <hr>
+
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div>
+                <label for="last-name">Last name</label>
+                <input type="text" name="last-name" id="last-name" required>
+            </div>
+            <div>
+                <label for="street">Street</label>
+                <input type="text" name="street" id="street" required>
+            </div>
+            <div>
+                <label for="postal-code">Postal Code</label>
+                <input 
+                    type="text" 
+                    name="postal-code" 
+                    id="postal-code" 
+                    minlength="5" 
+                    maxlength="5" 
+                    required
+                >
+            </div>
+            <div>
+                <label for="city">City</label>
+                <input type="text" name="city" id="city" required>
+            </div>
+            <button class="btn">Create account</button>
+            <p id="switch-form"><a href="/login">Login instead</a></p>
+        </form>
+    </main>
+    
+<%- include("../includes/footer") %>
