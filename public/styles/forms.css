@@ -1,0 +1,19 @@
+label {
+    display: block;
+    margin-top: var(--space-2);
+}
+
+input, textarea {
+    font: inherit;
+    padding: var(--space-1);
+    border-radius: var(--border-radius-small);
+    border: none;
+    width: 80%;
+}
+
+form div {
+    margin: var(--space-2) 0;
+}
+form button {
+    margin-top: var(--space-4);
+}

@@ -5,10 +5,18 @@
 html {
     font-family: "Quantico", sans-serif;
 
+    --color-darker-blue: #000044;
     --color-dark-blue: #191970;
     --color-cobalt-blue: #0047AB;
     --color-neon-blue: #1F51FF;
     --color-cornflower-blue: #6495ED;
+
+    --color-light-orange: #FFD580;
+    --color-amber: #FFBF00;
+    --color-bright-orange: #FFAC1C;
+    --color-yellow-orange: #FFAA33;
+    --color-orange: #FFA500;
+    --color-cadmium-orange: #F28C28;
     
     --color-error-100: #FAA0A0;
     --color-error-500: #D2042D;
@@ -19,8 +27,47 @@ html {
     --space-6: 1.5rem;
     --space-8: 2rem;
     
-    --border-radius-small: 4px;
-    --border-radius-medium: 6px;
+    --border-radius-small: 8px;
+    --border-radius-medium: 12px;
     
     --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+body {
+    background-color: var(--color-darker-blue);
+    color: aliceblue;
+    margin: 0;
+}
+
+main {
+    width: 90%;
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-amber);
+}
+
+.btn {
+    cursor: pointer;
+    font: inherit; 
+    padding: var(--space-2) var(--space-6);
+    background-color: var(--color-orange);
+    color: black;
+    border: 1px solid var(--color-orange);
+    border-radius: var(--border-radius-medium);
+}
+
+.btn:hover,
+.btn:active {
+    background-color: var(--color-cadmium-orange);
+    border-color: var(--color-cadmium-orange);
 }
