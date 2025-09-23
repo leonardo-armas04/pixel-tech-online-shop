@@ -1,5 +1,6 @@
 const path = require("path")
 const { doubleCsrf } = require("csrf-csrf")
+const crypto = require("crypto")
 const cookieParser = require("cookie-parser")
 const expressSession = require("express-session")
 
@@ -9,15 +10,14 @@ const app = express()
 const db = require("./database/database")
 const errorHandlerMiddleware = require("./middlewares/error-handler")
 const createSessionConfig = require("./config/session")
+const sessionConfig = createSessionConfig
 
 const {
     generateCsrfToken,
     doubleCsrfProtection
 } = doubleCsrf({
     getSecret: (req) => {
-        if (!req.session.csrfSecret) {
-            req.session.csrfSecret = Math.random()*(10000).toString()
-        }
+        req.session.csrfSecret = crypto.randomBytes(32).toString("hex")
         return req.session.csrfSecret
     },
     getSessionIdentifier: (req) => req.session.id
@@ -29,7 +29,7 @@ app.set("views",path.join(__dirname,"views")) // Where to find my views
 app.use(express.static("public"))
 app.use(express.urlencoded({extended: false}))
 
-const sessionConfig = createSessionConfig
+
 
 app.use(expressSession(sessionConfig))
 app.use(cookieParser())
