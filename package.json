@@ -10,8 +10,13 @@
   "author": "Leonardo",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "connect-mongodb-session": "^5.0.0",
+    "cookie-parser": "^1.4.7",
+    "csrf-csrf": "^4.0.3",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "mongodb": "^6.20.0"
   },
   "devDependencies": {
