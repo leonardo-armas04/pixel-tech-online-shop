@@ -1,27 +1,17 @@
 const path = require("path")
-const { doubleCsrf } = require("csrf-csrf")
-const crypto = require("crypto")
-const cookieParser = require("cookie-parser")
-const expressSession = require("express-session")
 
 const express = require("express")
 const app = express()
 
-const db = require("./database/database")
-const errorHandlerMiddleware = require("./middlewares/error-handler")
-const createSessionConfig = require("./config/session")
-const sessionConfig = createSessionConfig
+const expressSession = require("express-session")
+const csurf = require("csurf")
 
-const {
-    generateCsrfToken,
-    doubleCsrfProtection
-} = doubleCsrf({
-    getSecret: (req) => {
-        req.session.csrfSecret = crypto.randomBytes(32).toString("hex")
-        return req.session.csrfSecret
-    },
-    getSessionIdentifier: (req) => req.session.id
-})
+
+const db = require("./database/database")
+const addCsrfTokenMiddleware = require("./middlewares/csrf-token")
+const errorHandlerMiddleware = require("./middlewares/error-handler")
+const sessionConfig = require("./config/session")
+
 
 app.set("view engine","ejs") // Use the EJS package
 app.set("views",path.join(__dirname,"views")) // Where to find my views
@@ -29,19 +19,19 @@ app.set("views",path.join(__dirname,"views")) // Where to find my views
 app.use(express.static("public"))
 app.use(express.urlencoded({extended: false}))
 
-
-
 app.use(expressSession(sessionConfig))
-app.use(cookieParser())
-app.use(doubleCsrfProtection)
-app.use(function (req,res,next) {
-    res.locals.csrfToken = generateCsrfToken(req,res)
-    next()
+
+app.use((req, res, next) => {
+  if (req.path === "/favicon.ico") return res.status(204).end()
+  next()
 })
 
-const authRoutes = require("./routes/auth-routes")
+app.use(csurf())
+app.use(addCsrfTokenMiddleware)
 
+const authRoutes = require("./routes/auth-routes")
 app.use(authRoutes)
+
 
 app.use(errorHandlerMiddleware)
 

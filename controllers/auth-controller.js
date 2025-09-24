@@ -8,10 +8,10 @@ function getSignUp(req,res) {
 
 async function signUp(req,res) {
     const user = new User(
-        req.body.name,
-        req.body["last-name"],
         req.body.email,
         req.body.password,
+        req.body.name,
+        req.body["last-name"],
         req.body.street,
         req.body["postal-code"],
         req.body.city
@@ -28,6 +28,11 @@ async function signUp(req,res) {
 function getLogin(req,res) {
     res.render("costumer/auth/login")
 }
+
+// async function login(req,res) {
+//     const user = new User()
+//     const existingUser = await 
+// }
 
 module.exports = {
     getSignUp: getSignUp,
