@@ -10,7 +10,11 @@ const csurf = require("csurf")
 const db = require("./database/database")
 const addCsrfTokenMiddleware = require("./middlewares/csrf-token")
 const errorHandlerMiddleware = require("./middlewares/error-handler")
+const checkAuthStatusMiddleware = require("./middlewares/check-auth")
 const sessionConfig = require("./config/session")
+const baseRoutes = require("./routes/base-routes")
+const authRoutes = require("./routes/auth-routes")
+const productsRoutes = require("./routes/products-routes")
 
 
 app.set("view engine","ejs") // Use the EJS package
@@ -29,8 +33,11 @@ app.use((req, res, next) => {
 app.use(csurf())
 app.use(addCsrfTokenMiddleware)
 
-const authRoutes = require("./routes/auth-routes")
+app.use(checkAuthStatusMiddleware)
+
+app.use(baseRoutes)
 app.use(authRoutes)
+app.use(productsRoutes)
 
 
 app.use(errorHandlerMiddleware)

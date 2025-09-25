@@ -29,6 +29,10 @@ class User {
     getUserWithSameEmail() {
         return db.getDB().collection("users").findOne({ email: this.email })
     }
+
+    comparePassword(hassdedPassword) {
+        return bcrypt.compare(this.password,hassdedPassword)
+    }
 }
 
 module.exports = User
