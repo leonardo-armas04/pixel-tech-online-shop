@@ -1,5 +1,6 @@
 const User = require("../models/user-model")
 const authUtil = require("../util/authentication")
+const userDetailsAreValid = require("../util/validation")
 
 function getSignUp(req,res) {
     // A path relative to the views folder 
@@ -7,7 +8,20 @@ function getSignUp(req,res) {
     res.render("costumer/auth/signup")
 }
 
-async function signUp(req,res) {
+async function signUp(req,res,next) {
+    if (!userDetailsAreValid(
+        req.body.email,
+        req.body.password,
+        req.body.name,
+        req.body["last-name"],
+        req.body.street,
+        req.body["postal-code"],
+        req.body.city
+    )) {
+        res.redirect("/signup")
+        return
+    }
+
     const user = new User(
         req.body.email,
         req.body.password,
@@ -18,11 +32,29 @@ async function signUp(req,res) {
         req.body.city
     )
 
+    try {
+        const existAlready = await user.existAlready()
+        if (existAlready) {
+            res.redirect("/signup")
+            return
+        }
+    } catch (error) {
+        next(error)
+        return
+    }
+
+
     if(req.body.password === req.body["confirm-password"]) {
-        await user.signUp()
-        res.redirect("/login")
+        try {
+            await user.signUp()
+            res.redirect("/login")
+        } catch (error) {
+            next(error)
+            return
+        }
     } else {
-        res.send("Passwords don't match!")
+        res.redirect("/signup")
+        return
     }
 }
 
@@ -30,16 +62,27 @@ function getLogin(req,res) {
     res.render("costumer/auth/login")
 }
 
-async function login(req,res) {
+async function login(req,res,next) {
     const user = new User(req.body.email,req.body.password)
-    const existingUser = await user.getUserWithSameEmail()
+    let existingUser
+    try {
+        existingUser = await user.getUserWithSameEmail()
+    } catch (error) {
+        next(error)
+        return
+    }
 
     if (!existingUser) {
         res.redirect("/login")
         return
     }
 
-    const passwordIsCorrect = await user.comparePassword(existingUser.password)
+    let passwordIsCorrect
+    try {
+        passwordIsCorrect = await user.comparePassword(existingUser.password)
+    } catch (error) {
+        next(error)
+    }
 
     if (!passwordIsCorrect) {
         res.redirect("/login")
