@@ -7,14 +7,12 @@
     <%- include("../../shared/includes/header") %>
     <main>
         <h1>Login</h1>
-        <div class="alert-container">
-            <% if (inputData.errorMessage) { %>
-                <section class="alert">
-                    <h2>Invalid credentials</h2>
-                    <p><%= inputData.errorMessage %></p>
-                </section>
-            <% } %>
-        </div>
+        <% if (inputData.errorMessage) { %>
+            <section class="alert">
+                <h2>Invalid credentials</h2>
+                <p><%= inputData.errorMessage %></p>
+            </section>
+        <% } %>
         <form action="/login" method="POST">
             <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
             <div>

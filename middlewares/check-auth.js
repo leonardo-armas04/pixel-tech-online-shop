@@ -7,6 +7,7 @@ function checkAuthStatus(req,res,next) {
 
     res.locals.userId = userId
     res.locals.isAuth = true
+    res.locals.isAdmin = req.session.isAdmin
     next()
 }
 
