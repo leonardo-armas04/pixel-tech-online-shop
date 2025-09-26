@@ -1,14 +1,38 @@
 const User = require("../models/user-model")
 const authUtil = require("../util/authentication")
 const userDetailsAreValid = require("../util/validation")
+const sessionFlash = require("../util/session-flash")
 
 function getSignUp(req,res) {
+    let sessionData = sessionFlash.getSessionData(req)
+
+    if (!sessionData) {
+        sessionData = {
+            email: "",
+            password: "",
+            name: "",
+            lastName: "",
+            street: "",
+            postalCode: "",
+            city: ""
+        }
+    }
     // A path relative to the views folder 
     // because this is which we configured in the template engine
-    res.render("costumer/auth/signup")
+    res.render("costumer/auth/signup",{ inputData: sessionData })
 }
 
 async function signUp(req,res,next) {
+    const enteredData = {
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.name,
+        lastName: req.body["last-name"],
+        street: req.body.street,
+        postalCode: req.body["postal-code"],
+        city: req.body.city
+    }
+
     if (!userDetailsAreValid(
         req.body.email,
         req.body.password,
@@ -18,7 +42,12 @@ async function signUp(req,res,next) {
         req.body["postal-code"],
         req.body.city
     )) {
-        res.redirect("/signup")
+        sessionFlash.flashDataToSession(req, {
+            errorMessage: "Please check your input! Data provided incorrect",
+            ...enteredData
+        }, () => {
+            res.redirect("/signup")
+        })
         return
     }
 
@@ -35,7 +64,12 @@ async function signUp(req,res,next) {
     try {
         const existAlready = await user.existAlready()
         if (existAlready) {
-            res.redirect("/signup")
+            sessionFlash.flashDataToSession(req,{
+                errorMessage: "A user with this email already exists!😱",
+                ...enteredData
+            },() => {
+                res.redirect("/signup")
+            })
             return
         }
     } catch (error) {
@@ -53,13 +87,26 @@ async function signUp(req,res,next) {
             return
         }
     } else {
-        res.redirect("/signup")
+        sessionFlash.flashDataToSession(req,{
+            errorMessage: "Passwords don't match!",
+            ...enteredData
+        },() => {
+            res.redirect("/signup")
+        })
         return
     }
 }
 
 function getLogin(req,res) {
-    res.render("costumer/auth/login")
+    let sessionData = sessionFlash.getSessionData(req)
+
+    if (!sessionData) {
+        sessionData = {
+            email: "",
+            password: ""
+        }
+    }
+    res.render("costumer/auth/login",{ inputData: sessionData })
 }
 
 async function login(req,res,next) {
@@ -72,8 +119,16 @@ async function login(req,res,next) {
         return
     }
 
+    const sessionErrorData = {
+        errorMessage: "Please check your email and password 🥶",
+        email: user.email,
+        password: user.password
+    }
+
     if (!existingUser) {
-        res.redirect("/login")
+        sessionFlash.flashDataToSession(req,sessionErrorData,() => {
+            res.redirect("/login")
+        })
         return
     }
 
@@ -85,14 +140,15 @@ async function login(req,res,next) {
     }
 
     if (!passwordIsCorrect) {
-        res.redirect("/login")
+        sessionFlash.flashDataToSession(req,sessionErrorData,() => {
+            res.redirect("/login")
+        })
         return
     }
 
     authUtil.createUserSession(req,existingUser,() => {
         res.redirect("/")
     })
-
 }
 
 function logout(req,res) {
