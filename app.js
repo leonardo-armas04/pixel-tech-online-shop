@@ -15,7 +15,7 @@ const sessionConfig = require("./config/session")
 const baseRoutes = require("./routes/base-routes")
 const authRoutes = require("./routes/auth-routes")
 const productsRoutes = require("./routes/products-routes")
-
+const adminRoutes = require("./routes/admin-routes")
 
 app.set("view engine","ejs") // Use the EJS package
 app.set("views",path.join(__dirname,"views")) // Where to find my views
@@ -38,6 +38,7 @@ app.use(checkAuthStatusMiddleware)
 app.use(baseRoutes)
 app.use(authRoutes)
 app.use(productsRoutes)
+app.use("/admin",adminRoutes)
 
 
 app.use(errorHandlerMiddleware)

@@ -73,6 +73,16 @@ a {
     border-color: var(--color-cadmium-orange);
 }
 
+.btn-alt {
+    background-color: transparent;
+    color: var(--color-amber);
+}
+
+.btn-alt:hover,
+.btn-alt:active {
+    background-color: var(--color-dark-blue);
+}
+
 .alert {
     border-radius: var(--border-radius-small);
     background-color: var(--color-error-100);

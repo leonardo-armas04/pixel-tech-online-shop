@@ -1,3 +1,7 @@
+form {
+    text-align: center;
+}
+
 label {
     display: block;
     margin-top: var(--space-2);
@@ -13,7 +17,4 @@ input, textarea {
 
 form div {
     margin: var(--space-2) 0;
-}
-form button {
-    margin-top: var(--space-4);
 }
