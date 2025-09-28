@@ -26,16 +26,30 @@
 .product-item-content h2 {
     font-size: 1.25rem;
     margin: 0;
+    margin-bottom: var(--space-1);
+}
+
+.product-item-content h3 {
+    margin: 0 auto;
     margin-bottom: var(--space-4);
+    font-weight: 500;
 }
 
 .product-item-actions {
     display: flex;
     gap: var(--space-2);
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .product-item-actions a,
 .product-item-actions button {
     width: 6.25rem;
+}
+
+a.larger {
+    width: 9rem;
+}
+
+#product-description {
+    white-space: pre-wrap;
 }
