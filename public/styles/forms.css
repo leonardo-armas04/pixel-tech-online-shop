@@ -18,3 +18,23 @@ input, textarea {
 form div {
     margin: var(--space-2) 0;
 }
+
+#image-upload {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+#image-upload input {
+    max-width: 18rem;
+}
+
+#image-upload img {
+    display: none;
+    width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: var(--border-radius-small);
+}
