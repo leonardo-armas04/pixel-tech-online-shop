@@ -21,6 +21,7 @@ app.set("view engine","ejs") // Use the EJS package
 app.set("views",path.join(__dirname,"views")) // Where to find my views
 
 app.use(express.static("public"))
+app.use("/products/assets",express.static("product-data"))
 app.use(express.urlencoded({extended: false}))
 
 app.use(expressSession(sessionConfig))

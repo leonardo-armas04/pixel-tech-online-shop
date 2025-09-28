@@ -10,17 +10,13 @@
             <p><a href="/admin/products/new" class="btn">Add new product</a></p>
         </section>
         <section>
-            <p>A list of products...</p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam culpa, cum dicta inventore illum, necessitatibus quas
-                consequuntur doloremque corrupti cupiditate fugit architecto blanditiis eius reiciendis molestiae rerum omnis magnam
-                ducimus.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, aspernatur. Nulla soluta exercitationem doloremque,
-                est perspiciatis enim iste! Doloremque ipsam dolorum consectetur et dolor enim modi excepturi asperiores facilis
-                voluptate?
-            </p>
+            <ul>
+                <% for (const product of products) { %>
+                    <li>
+                        <%- include("includes/product-item",{product:product}) %>
+                    </li>
+                <% } %>
+            </ul>
         </section>
     </main>
     
