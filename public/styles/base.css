@@ -102,3 +102,12 @@ a {
 .alert p {
     margin: var(--space-1) 0;
 }
+
+.badge {
+    margin-left: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    border-radius: 2rem;
+    background-color: var(--color-neon-blue);
+    color: aliceblue;
+    width: fit-content;
+}
