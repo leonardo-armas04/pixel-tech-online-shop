@@ -1,0 +1,18 @@
+#product-details header {
+    padding-top: var(--space-6);
+    display: flex;
+    justify-content: space-around;
+}
+
+#product-details img {
+    width: 16rem;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: var(--border-radius-medium)
+}
+
+#product-info {
+    width: fit-content;
+    text-align: center;
+    padding: 0 var(--space-4);
+}
