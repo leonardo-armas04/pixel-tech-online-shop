@@ -1,0 +1,24 @@
+<li>
+    <article class="cart-item">
+        <div class="cart-item-info">
+            <div>
+                <h2><%= item.product.title %></h2>
+                <p>
+                    (<span class="cart-item-quantity"><%= item.quantity %></span>x
+                    <b>$<%= item.product.price %></b>)
+                </p>
+                <h3>
+                    $<span class="cart-item-price"><%= item.totalPrice %></span> 
+                </h3>
+            </div>
+            <div>
+                <img src="<%= item.product.imageURL %>" alt="<%= item.product.title %>">
+            </div>
+        </div>
+        <form class="cart-item-management" data-productid="<%= item.product.id %>" data-csrf="<%= locals.csrfToken %>">
+            <input type="number" name="" id="" value="<%= item.quantity %>" min="0" required>
+            <button class="btn btn-alt">Update</button>
+        </form>
+    </article>
+    <hr>
+</li>

@@ -111,3 +111,7 @@ a {
     color: aliceblue;
     width: fit-content;
 }
+
+input:focus {
+    background-color: #D0E9FE;
+}
