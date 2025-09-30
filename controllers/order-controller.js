@@ -4,7 +4,7 @@ const User = require("../models/user-model")
 async function getOrders(req,res,next) {
   try {
     const orders = await Order.findAllForUser(res.locals.userId);
-    res.render('costumer/orders/all-orders', {
+    res.render('customer/orders/all-orders', {
       orders: orders,
     });
   } catch (error) {

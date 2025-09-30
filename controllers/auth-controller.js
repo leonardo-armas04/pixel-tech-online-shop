@@ -19,7 +19,7 @@ function getSignUp(req,res) {
     }
     // A path relative to the views folder 
     // because this is which we configured in the template engine
-    res.render("costumer/auth/signup",{ inputData: sessionData })
+    res.render("customer/auth/signup",{ inputData: sessionData })
 }
 
 async function signUp(req,res,next) {
@@ -106,7 +106,7 @@ function getLogin(req,res) {
             password: ""
         }
     }
-    res.render("costumer/auth/login",{ inputData: sessionData })
+    res.render("customer/auth/login",{ inputData: sessionData })
 }
 
 async function login(req,res,next) {
