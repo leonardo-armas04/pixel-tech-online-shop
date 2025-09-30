@@ -19,7 +19,7 @@ const authRoutes = require("./routes/auth-routes")
 const productsRoutes = require("./routes/products-routes")
 const adminRoutes = require("./routes/admin-routes")
 const cartRoutes = require("./routes/cart-routes")
-const { json } = require("stream/consumers")
+const ordersRoutes = require("./routes/orders-routes")
 
 app.set("view engine","ejs") // Use the EJS package
 app.set("views",path.join(__dirname,"views")) // Where to find my views
@@ -47,6 +47,7 @@ app.use(authRoutes)
 app.use(productsRoutes)
 app.use("/cart",cartRoutes)
 app.use(protectRoutesMiddleware)
+app.use("/orders",ordersRoutes)
 app.use("/admin",adminRoutes)
 
 
