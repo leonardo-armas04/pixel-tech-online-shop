@@ -36,3 +36,9 @@
 #cart-total h3 {
     font-size: 1.25rem;
 }
+
+@media (max-width: 48rem) {
+    .cart-item-management input {
+        padding-left: 0;
+    }
+}

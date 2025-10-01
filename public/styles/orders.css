@@ -1,0 +1,6 @@
+.order-actions select {
+    font: inherit;
+    height: 2.5rem;
+    width: 8rem;
+    border-radius: var(--border-radius-medium);
+}

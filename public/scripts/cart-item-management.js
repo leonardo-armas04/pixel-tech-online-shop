@@ -47,8 +47,10 @@ async function updateCartItem(event) {
     const cartTotalPriceSpan = document.querySelector("#cart-total span")
     cartTotalPriceSpan.innerText = responseData.updatedCartData.newTotalPrice
 
-    const cartBadge = document.querySelector(".nav-items .badge")
-    cartBadge.innerText = responseData.updatedCartData.newTotalQuantity
+    const cartBadgeElements = document.querySelectorAll(".nav-items .badge")
+    for (const cartBadge of cartBadgeElements) {
+        cartBadge.innerText = responseData.updatedCartData.newTotalQuantity
+    }
 
     console.log(responseData)
 }

@@ -26,7 +26,7 @@ class Order {
             orderDoc.status,
             orderDoc.date,
             orderDoc._id
-        );
+        )
     }
 
     static transformOrderDocuments(orderDocs) {
@@ -39,7 +39,7 @@ class Order {
             .collection('orders')
             .find()
             .sort({ _id: -1 })
-            .toArray();
+            .toArray()
 
         return this.transformOrderDocuments(orders);
     }
